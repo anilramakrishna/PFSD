@@ -1,0 +1,21 @@
+{% extends 'home1/main.html' %}
+{% load static %}
+{% block content %}
+
+
+<br>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card card-body">
+            <form actiom="" method="POST">
+                {% csrf_token %}
+                {{form}}
+                <br>
+                <br>
+
+                <input class="btn btn-info big" type="submit" name="Submit">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

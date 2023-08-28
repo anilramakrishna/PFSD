@@ -1,0 +1,582 @@
+{% extends 'home1/main.html'%}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/0b904932f5.js" crossorigin="anonymous"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+
+        body {
+            background: #eee;
+        }
+
+        h1 {
+            font-family: 'Lato', sans-serif;
+        }
+
+        h3 {
+            font-family: 'Lato', sans-serif;
+        }
+
+        .single_advisor_profile {
+            position: relative;
+            margin-bottom: 50px;
+            -webkit-transition-duration: 500ms;
+            transition-duration: 500ms;
+            z-index: 1;
+            border-radius: 15px;
+            -webkit-box-shadow: 0 0.25rem 1rem 0 rgba(47, 91, 234, 0.125);
+            box-shadow: 0 0.25rem 1rem 0 rgba(47, 91, 234, 0.125);
+        }
+
+        .single_advisor_profile .advisor_thumb {
+            position: relative;
+            z-index: 1;
+            border-radius: 15px 15px 0 0;
+            margin: 0 auto;
+            padding: 30px 30px 0 30px;
+            background-color: #070a57;
+            overflow: hidden;
+        }
+
+        .single_advisor_profile .advisor_thumb::after {
+            -webkit-transition-duration: 500ms;
+            transition-duration: 500ms;
+            position: absolute;
+            width: 150%;
+            height: 80px;
+            bottom: -45px;
+            left: -25%;
+            content: "";
+            background-color: #ffffff;
+            -webkit-transform: rotate(-15deg);
+            transform: rotate(-15deg);
+        }
+
+        @media only screen and (max-width: 575px) {
+            .single_advisor_profile .advisor_thumb::after {
+                height: 160px;
+                bottom: -90px;
+            }
+        }
+
+        .single_advisor_profile .advisor_thumb .social-info {
+            position: absolute;
+            z-index: 1;
+            width: 100%;
+            bottom: 0;
+            right: 30px;
+            text-align: right;
+        }
+
+        .single_advisor_profile .advisor_thumb .social-info a {
+            font-size: 14px;
+            color: #020710;
+            padding: 0 5px;
+        }
+
+        .single_advisor_profile .advisor_thumb .social-info a:hover,
+        .single_advisor_profile .advisor_thumb .social-info a:focus {
+            color: #070a57;
+        }
+
+        .single_advisor_profile .advisor_thumb .social-info a:last-child {
+            padding-right: 0;
+        }
+
+        .single_advisor_profile .single_advisor_details_info {
+            position: relative;
+            z-index: 1;
+            padding: 30px;
+            text-align: right;
+            -webkit-transition-duration: 500ms;
+            transition-duration: 500ms;
+            border-radius: 0 0 15px 15px;
+            background-color: #ffffff;
+        }
+
+        .single_advisor_profile .single_advisor_details_info::after {
+            -webkit-transition-duration: 500ms;
+            transition-duration: 500ms;
+            position: absolute;
+            z-index: 1;
+            width: 50px;
+            height: 3px;
+            background-color: #070a57;
+            content: "";
+            top: 12px;
+            right: 30px;
+        }
+
+        .single_advisor_profile .single_advisor_details_info h6 {
+            margin-bottom: 0.25rem;
+            -webkit-transition-duration: 500ms;
+            transition-duration: 500ms;
+        }
+
+        @media only screen and (min-width: 768px) and (max-width: 991px) {
+            .single_advisor_profile .single_advisor_details_info h6 {
+                font-size: 14px;
+            }
+        }
+
+        .single_advisor_profile .single_advisor_details_info p {
+            -webkit-transition-duration: 500ms;
+            transition-duration: 500ms;
+            margin-bottom: 0;
+            font-size: 14px;
+        }
+
+        @media only screen and (min-width: 768px) and (max-width: 991px) {
+            .single_advisor_profile .single_advisor_details_info p {
+                font-size: 12px;
+            }
+        }
+
+        .single_advisor_profile:hover .advisor_thumb::after,
+        .single_advisor_profile:focus .advisor_thumb::after {
+            background-color: black;
+        }
+
+        .single_advisor_profile:hover .advisor_thumb .social-info a,
+        .single_advisor_profile:focus .advisor_thumb .social-info a {
+            color: #ffffff;
+        }
+
+        .single_advisor_profile:hover .advisor_thumb .social-info a:hover,
+        .single_advisor_profile:hover .advisor_thumb .social-info a:focus,
+        .single_advisor_profile:focus .advisor_thumb .social-info a:hover,
+        .single_advisor_profile:focus .advisor_thumb .social-info a:focus {
+            color: #ffffff;
+        }
+
+        .single_advisor_profile:hover .single_advisor_details_info,
+        .single_advisor_profile:focus .single_advisor_details_info {
+            background-color: black;
+        }
+
+        .single_advisor_profile:hover .single_advisor_details_info::after,
+        .single_advisor_profile:focus .single_advisor_details_info::after {
+            background-color: #ffffff;
+        }
+
+        .single_advisor_profile:hover .single_advisor_details_info h6,
+        .single_advisor_profile:focus .single_advisor_details_info h6 {
+            color: #ffffff;
+        }
+
+        .single_advisor_profile:hover .single_advisor_details_info p,
+        .single_advisor_profile:focus .single_advisor_details_info p {
+            color: #ffffff;
+        }
+
+        .feature-box {
+            text-align: center;
+            padding: 3%;
+        }
+
+        .icon {
+            margin-bottom: 1rem;
+        }
+
+        .icon:hover {
+            color: #070a57;
+        }
+
+        .big {
+            padding: 0 40px 0 40px;
+        }
+
+        .small {
+            padding: 0 40px 0 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="car" class="container">
+        <br>
+        <!-- Carousel start -->
+        <h1>Featured Properties</h1>
+        <br>
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3"
+                    aria-label="Slide 4"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4"
+                    aria-label="Slide 5"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="static/des-1.png" class=" d-block w-100" alt="..." height="650px">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Appartment</h5>
+                        <p>Some representative placeholder content for the first slide.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="static/des-2.png" class="d-block w-100" alt="..." height="650px">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Duplex</h5>
+                        <p>Some representative placeholder content for the second slide.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="static/des-3.png" class=" d-block w-100" alt="..." height="650px">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Villa</h5>
+                        <p>Some representative placeholder content for the third slide.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="static/slide-4.png" class=" d-block w-100" alt="..." height="650px">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Commercial Space</h5>
+                        <p>Some representative placeholder content for the third slide.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="static/slide-5.png" class=" d-block w-100" alt="..." height="650px">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Beach House</h5>
+                        <p>Some representative placeholder content for the third slide.</p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <!-- Carousel end -->
+        <br>
+        <br>
+
+        <!-- Features module start -->
+        <section id="features">
+            <div class="row">
+                <div class="feature-box col-lg-4">
+                    <i class="fa-solid fa-handshake fa-4x icon"></i>
+                    <h3>Experienced Agents</h3>
+                    <p>Find an Agent who knows your market best.</p>
+                </div>
+
+                <div class="feature-box col-lg-4">
+                    <i class="fa-solid fa-wallet fa-4x icon"></i>
+                    <h3>Buy or Rent</h3>
+                    <p>Millions of houses and appartments in your favourite city.</p>
+                </div>
+
+                <div class="feature-box col-lg-4">
+                    <i class="fa-solid fa-cloud-arrow-up fa-4x icon"></i>
+                    <h3>List your own property</h3>
+                    <p>Sign Up now and sell or rent your own property.</p>
+                </div>
+            </div>
+            <!-- Features module end -->
+
+            <!-- Categories module start -->
+            <center>
+                <h1>Explore Our Categories</h1>
+                <h3>Browse our comprehensive listings</h3>
+                <br>
+
+                <div class="d-flex justify-content-center">
+                    <div class="col-lg-4 big">
+                        <div class="card">
+                            <img src="static/duplex-1.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Duplex</h5>
+                                <p class="card-text">Discover the true defination of luxury.</p>
+                                <a href="{% url 'duplex' %}" class="btn btn-dark">Explore More</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 big">
+                        <div class="card">
+                            <img src="static/villaa.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="Villa">Villa</h5>
+                                <p class="card-text">Vacation mode on.</p>
+                                <a href="{% url 'villa' %}" class="btn btn-dark">Explore More</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 big">
+                        <div class="card">
+                            <img src="static/beach house.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Beach House</h5>
+                                <p class="card-text">Stunning views. Superb atmosphere.</p>
+                                <a href="{% url 'beach' %}" class="btn btn-dark">Explore More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+
+                <div class="d-flex justify-content-center">
+                    <div class="col-lg-4 small">
+                        <div class="card">
+                            <img src="static/appartment-1.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Appartment</h5>
+                                <p class="card-text">A Higher Quality of Living</p>
+                                <a href="{% url 'appartment' %}" class="btn btn-dark">Explore More</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 small">
+                        <div class="card">
+                            <img src="static/commercial.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Commercial Space</h5>
+                                <p class="card-text">The ideal space to balance life and work.</p>
+                                <a href="{% url 'commercial' %}" class="btn btn-dark">Explore More</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 small">
+                        <div class="card">
+                            <img src="static/rental.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Rental</h5>
+                                <p class="card-text">Live Like You Want</p>
+                                <a href="{% url 'rental' %}" class="btn btn-dark">Explore More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </center>
+            <br>
+            <!-- Categories module end -->
+
+            <!-- Agents start-->
+
+            <div class="row justify-content-center">
+                <div class="col-12 col-sm-8 col-lg-6">
+                    <!-- Section Heading-->
+                    <div class="section_heading text-center wow fadeInUp" data-wow-delay="0.2s"
+                        style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                        <h3>Meet Our <span> Agents</span></h3>
+                        <p>Our Agents are Super Responsive, You Can Get in Touch With Them Through Their Social Handles
+                            Or Through Our Website.
+                        </p>
+                        <div class="line"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- Single Advisor-->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.2s"
+                        style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                        <!-- Team Thumb-->
+                        <div class="advisor_thumb"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                            <!-- Social Info-->
+                            <div class="social-info"><a href="https://www.facebook.com/"><i
+                                        class="fa fa-facebook"></i></a><a href="https://twitter.com/"><i
+                                        class="fa fa-twitter"></i></a><a
+                                    href="https://www.linkedin.com/in/nerella-venkata-anil-rama-krishna-190ab1225/"><i
+                                        class="fa fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                        <!-- Team Details-->
+                        <div class="single_advisor_details_info">
+                            <h6>Anwar</h6>
+                            <p class="designation">Agent</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Single Advisor-->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.3s"
+                        style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+                        <!-- Team Thumb-->
+                        <div class="advisor_thumb"><img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="">
+                            <!-- Social Info-->
+                            <div class="social-info"><a href="https://www.facebook.com/"><i
+                                        class="fa fa-facebook"></i></a><a href="https://twitter.com/"><i
+                                        class="fa fa-twitter"></i></a><a
+                                    href="https://www.linkedin.com/in/nerella-venkata-anil-rama-krishna-190ab1225/"><i
+                                        class="fa fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                        <!-- Team Details-->
+                        <div class="single_advisor_details_info">
+                            <h6>Anil</h6>
+                            <p class="designation">Agent</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Single Advisor-->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.4s"
+                        style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+                        <!-- Team Thumb-->
+                        <div class="advisor_thumb"><img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="">
+                            <!-- Social Info-->
+                            <div class="social-info"><a href="https://www.facebook.com/"><i
+                                        class="fa fa-facebook"></i></a><a href="https://twitter.com/"><i
+                                        class="fa fa-twitter"></i></a><a
+                                    href="https://www.linkedin.com/in/devendra-vicharapu-33967a248/"><i
+                                        class="fa fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                        <!-- Team Details-->
+                        <div class="single_advisor_details_info">
+                            <h6>Devendra</h6>
+                            <p class="designation">Agent</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Single Advisor-->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.5s"
+                        style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
+                        <!-- Team Thumb-->
+                        <div class="advisor_thumb"><img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="">
+                            <!-- Social Info-->
+                            <div class="social-info"><a href="https://www.facebook.com/"><i
+                                        class="fa fa-facebook"></i></a><a href="https://twitter.com/"><i
+                                        class="fa fa-twitter"></i></a><a
+                                    href="https://www.linkedin.com/in/devendra-vicharapu-33967a248/"><i
+                                        class="fa fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                        <!-- Team Details-->
+                        <div class="single_advisor_details_info">
+                            <h6>Rajendra</h6>
+                            <p class="designation">Agent</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Agents end -->
+
+            <!-- Membership module start -->
+            <div class="membership">
+                <center>
+                    <h1>Membership Plans</h1>
+                    <p>Choose the plan that suits you best</p>
+                </center>
+                <br>
+                <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+                    <div class="col">
+                        <div class="card mb-4 rounded-3 shadow-sm">
+                            <div class="card-header py-3 bg-dark">
+                                <h4 class="my-0 fw-normal" style="color:#fff ;">PERSONAL</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title">$0<small
+                                        class="text-muted fw-light">/mo</small>
+                                </h1>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li>10 users included</li>
+                                    <li>2 GB of storage</li>
+                                    <li>Email support</li>
+                                    <li>Help center access</li>
+                                </ul>
+                                <a href="{% url 'register' %}"><button type="button"
+                                        class="w-100 btn btn-lg btn-dark">Sign up for
+                                        free</button></a>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card mb-4 rounded-3 shadow-sm">
+                            <div class="card-header py-3 bg-dark">
+                                <h4 class="my-0 fw-normal" style="color:#fff ;">PROFESSIONAL</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title">$15<small
+                                        class="text-muted fw-light">/mo</small>
+                                </h1>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li>20 users included</li>
+                                    <li>10 GB of storage</li>
+                                    <li>Priority email support</li>
+                                    <li>Help center access</li>
+                                </ul>
+                                <button type="button" class="w-100 btn btn-lg btn-dark">Get started</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card mb-4 rounded-3 shadow-sm border">
+                            <div class="card-header py-3 text-bg bg-dark ">
+                                <h4 class="my-0 fw-normal" style="color: #fff;">BUSINESS</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title">$29<small
+                                        class="text-muted fw-light">/mo</small>
+                                </h1>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li>30 users included</li>
+                                    <li>15 GB of storage</li>
+                                    <li>Phone and email support</li>
+                                    <li>Help center access</li>
+                                </ul>
+                                <button type="button" class="w-100 btn btn-lg btn-dark">Contact us</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Membership module end -->
+
+
+    </div>
+    <!-- Footer start -->
+    <footer class="py-3 my-4 bg-dark">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <li class="nav-item"><a href="#" class="nav-link px-2" style="color:#fff ;">About Us</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2" style="color:#fff ;">Agents</a></li>
+            <li class="nav-item"><a href="{% url 'properties' %}" class="nav-link px-2"
+                    style="color:#fff ;">Properties</a></li>
+            <li class="nav-item"><a href="{% url 'contact' %}" class="nav-link px-2" style="color:#fff ;">Contact Us</a>
+            </li>
+            <li class="nav-item"><a href="{% url 'submit' %}" class="nav-link px-2" style="color:#fff ;">Sell
+                    Properties</a>
+            </li>
+        </ul>
+        <p class="text-center text-muted">&copy; 2022 Lander, Inc</p>
+    </footer>
+    <!-- Footer end -->
+</body>
+
+</html>
+{% endblock %}

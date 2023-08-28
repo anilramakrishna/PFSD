@@ -1,0 +1,24 @@
+{% extends 'home1/main.html' %}
+{% load static %}
+{% block content %}
+
+<br>
+<div class="d-flex justify-content-center">
+    <div class="col-md-6">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">
+                    Are you sure you want delete the {{item}}?
+                </h5><br>
+                <form action="{% url 'delete_order' item.id %}" method="POST">
+                    {% csrf_token %}
+                    <a class="btn btn-success" href="{% url 'management' %}">Cancel</a>
+                    <input class="btn btn-danger" type="submit" name="Confirm">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

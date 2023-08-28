@@ -1,0 +1,119 @@
+{% extends 'home1/main.html' %}
+
+{% block content %}
+
+{% for group in request.user.groups.all %}
+{% if group.name == 'admin' %}
+<br>
+<div class="row m-0">
+    <div class="col-md-5">
+        <h5>CUSTOMERS:</h5>
+        <hr>
+        <div class="card card-body">
+            <a class="btn btn-primary  btn-sm btn-block" href="">Customer</a>
+            <table class="table table-sm">
+                <tr>
+                    <th></th>
+                    <th>Customer username</th>
+                    <th>Phone</th>
+                </tr>
+                {% for i in Customer %}
+                <tr>
+                    <td><a class="btn btn-info" href="{% url 'customer' i.id %}">view</a></td>
+                    <td>{{i.user}}</td>
+                    <td>{{i.phone}}</td>
+                </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+
+    <br>
+    <h5>CONTACT_US</h5>
+    <hr>
+    <div class="card card-body">
+        <a class="btn btn-primary  btn-sm btn-block" href="">PROPERTIES</a>
+        <table class="table table-sm">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Subject</th>
+                <th>Message</th>
+            </tr>
+            {% for i in coninf %}
+            <tr>
+                <td>{{i.name}}</td>
+                <td>{{i.email}}</td>
+                <td>{{i.subject}}</td>
+                <td>{{i.message}}</td>
+
+            </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+</div>
+{% endif %}
+{% endfor %}
+<div class="col-md-7">
+    <h5>EXISTING PROPERTIES</h5>
+    <hr>
+    <div class="card card-body">
+        <a class="btn btn-primary  btn-sm btn-block" href="">PROPERTIES</a>
+        <table class="table table-sm">
+            <tr>
+                <th>Username</th>
+                <th>Product</th>
+                <th>Date Orderd</th>
+                <th>Status</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+            {% for i in Property %}
+            <tr>
+                <td>{{i.name}}</td>
+                <td>{{i.property_type}}</td>
+                <td>{{i.date_created}}</td>
+                <td>{{i.status}}</td>
+                <td><a class="btn btn-primary" href="{% url 'update' i.id %}">Update</a></td>
+                <td><a class="btn btn-danger" href="{% url 'delete_order' i.id %}">Delete</a></td>
+            </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+    {% for group in request.user.groups.all %}
+    {% if group.name == 'admin' %}
+    <br>
+    <h5>DELETED PROPERTIES</h5>
+    <hr>
+    <div class="card card-body">
+        <a class="btn btn-primary  btn-sm btn-block" href="">PROPERTIES</a>
+        <table class="table table-sm">
+            <tr>
+                <th>Username</th>
+                <th>Product</th>
+                <th>Date Orderd</th>
+                <th>ReOpen</th>
+            </tr>
+            {% for i in Deleted_Properties %}
+            <tr>
+                <td>{{i.name}}</td>
+                <td>{{i.property_type}}</td>
+                <td>{{i.date_created}}</td>
+                <td><a class="btn btn-primary" href="{% url 'reopen_order' i.id %}">ReOpen</a></td>
+
+            </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+</div>
+
+
+{% endif %}
+{% endfor %}
+</div>
+
+{% endblock %}

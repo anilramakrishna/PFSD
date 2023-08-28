@@ -1,0 +1,77 @@
+{% extends 'home1/main.html'%}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+
+        h1 {
+            font-family: 'Lato', sans-serif;
+        }
+
+        .big {
+            padding: 25px 45px 25px 45px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <br>
+        <h1>Properties</h1>
+        <br>
+        <center>
+            <!-- row-1 starts -->
+            <center class="row">
+                {% for i in dup %}
+                {% if i.property_type == 'Duplex' and i.status == 'Approved' %}
+                <div class="col-lg-4 big">
+                    <div class="card">
+                        <img src="images1/{{i.property_image}}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{i.property_type}}</h5>
+                            <p class="card-text">Length: {{i.length}}sq.ft<br>
+                                Breadth: {{i.breadth}}sq.ft<br>
+                                Height: {{i.Height}}sq.ft</p>
+
+                            <a href="#" class="btn btn-dark">BUY</a>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+
+
+    </div>
+    <!-- Footer start -->
+    <footer class="py-3 my-4 bg-dark">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <li class="nav-item"><a href="#" class="nav-link px-2" style="color:#fff ;">About Us</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2" style="color:#fff ;">Agents</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2" style="color:#fff ;">Properties</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2" style="color:#fff ;">Contact Us</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2" style="color:#fff ;">Sell Properties</a>
+            </li>
+        </ul>
+        <p class="text-center text-muted">&copy; 2022 Lander, Inc</p>
+    </footer>
+    <!-- Footer end -->
+</body>
+
+</html>
+
+
+
+
+{% endblock %}

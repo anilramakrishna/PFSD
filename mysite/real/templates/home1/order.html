@@ -1,0 +1,25 @@
+{% extends 'home1/main.html' %}
+{% load static %}
+{% block content %}
+<h5>YOUR PROPERTIES</h5>
+<hr>
+<div class="card card-body">
+    <a class="btn btn-primary  btn-sm btn-block" href="">PROPERTIES</a>
+    <table class="table table-sm">
+        <tr>
+            <th>Product</th>
+            <th>Date Orderd</th>
+            <th>Status</th>
+        </tr>
+        {% for i in properties %}
+        <tr>
+            <td>{{i.property_type}}</td>
+            <td>{{i.date_created}}</td>
+            <td>{{i.status}}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+</div>
+
+{% endblock %}
